@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Edit Blog Post{% endblock %}
+{% block content %}
+
+
+<h1>Update Post</h1>
+<br/><br/>
+
+<form action="edit/{{ post_id}}" method="POST">
+    {% csrf_token %}
+    
+    <input type="text" name="name" value="{{ post.name }}" required />
+    <textarea name="body" value="{{ post.body }}" required></textarea>
+    <div class="input1">
+        <input type="file">
+        <input type="submit" value="Tweet" id="tweet" />
+    </div>
+    
+</form>
