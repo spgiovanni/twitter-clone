@@ -3,10 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post
 from .forms import PostForm
 from django.template import loader
+from cloudinary.forms import cl_init_js_callbacks
 
 def index(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
 
             # If yes save it
@@ -16,7 +17,7 @@ def index(request):
         else:
 
             #If NO show error
-            return HttpResponseRedirect(form.erros.as_json())
+            return HttpResponseRedirect(form.errors.as_json())
 
     # Get all posts, limit = 20
     posts = Post.objects.all()[:20]
@@ -33,6 +34,18 @@ def delete (request,post_id):
 
 def edit (request,post_id):
         post = Post.objects.get(id=post_id)
-        template = loader.get_template('update_post.html')
-        context = { 'post' }
-        return HttpResponse(template.render(context, request))
+        if request.method == 'POST':
+          form=PostForm(request.POST,request.FILES,instance = post)
+          
+          if form.is_valid():
+             post.save()
+             return HttpResponseRedirect('/')
+          else:
+            form=PostForm(PostForm)
+        return render(request,'update_post.html',{'post':post})
+
+def like(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post.like += 1
+    post.save()
+    return HttpResponseRedirect('/')

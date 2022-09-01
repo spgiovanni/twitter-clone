@@ -1,6 +1,6 @@
+from tokenize import blank_re
 from django.db import models
-from django.contrib.auth.models import User
-from cloudinary.models import CLOUDINARY_FIELD_DB_RE
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Post(models.Model):
@@ -16,6 +16,8 @@ class Post(models.Model):
         'Body', blank=True, null=True, max_length=140, db_index=True
     )
     
+    image = CloudinaryField('image', blank = True, db_index = True)
+    like = models.IntegerField(null=True, blank=True, default=0)
 
     created_at = models.DateTimeField(
         'Create DateTime', blank=True, auto_now_add=True

@@ -5,12 +5,12 @@
             <img src="{% static 'img/globe.png' %}" alt="">
             <h1>Home</h1>
         </header>
-        <form action="/" method="POST">
+        <form action="/" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="text" name="name" placeholder="Name" required />
             <textarea name="body" placeholder="Tell us everything" required></textarea>
             <div class="input1">
-                <input type="file">
+                <input name="image" type="file">
                 <input type="submit" value="Tweet" id="tweet" />
             </div>
             
@@ -18,11 +18,11 @@
     </section>
     <section class="posts">
         <ul>
-            {% for post in posts %}
+            {% for post in posts reversed %}
             <li>
                 <img class="menu_icon js-menu-icon" src="{% static 'img/menu.png' %}"  />
                 <div class="menu">
-                    <a href= "edit/{{ posts.id}}">Edit</a>
+                    <a href= "edit/{{ post.id}}/">Edit</a>
                     <a href= "/delete/{{ post.id }}/">Delete</a>
                 </div>
                 <div class="logo">
@@ -36,6 +36,18 @@
                         {{ post.created_at }}
                     </div>
                     <p>{{ post.body }}</p>
+                    {% if  post.image.url %}
+                    <img src={{post.image.url}} alt="">
+                    {% endif %}
+                    <div class="like">
+                        <a href="like/{{post.id}}/" class="like">
+                        <img src="{% static  'img/like.png' %}" alt="">
+                        <p >{{post.like}}</p>
+                        </a>
+                    </div>
+                    
+                    
+
                     
                 </div>
                 

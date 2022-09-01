@@ -20,6 +20,21 @@ Post
     display: inline-block;
     margin-right: 5%;
 }
+.input1 a {
+    background-color: aquamarine;
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: 0px;
+    color: darkblue;
+    text-decoration: none;
+}
+header{
+    display:flex;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+}
 
 .post_form header {
    border-bottom: 1px solid gray;
@@ -32,6 +47,17 @@ Post
 
 .post_form .input1{
     display: inline-block;
+    width: 100%;
+}
+input{
+    width: 70% !important;
+}
+button {
+    background-color: aquamarine;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 0px;
+    color: darkblue;
 }
 
 .post_form input{
@@ -84,7 +110,7 @@ Post
     /* background-color: gray; */
     display: block;
     width:50px;
-    height:50px;
+
     /* padding:5%; */
     margin: 10%;
 }
@@ -106,4 +132,14 @@ Post
 
 .posts li .name_boy .datetime{
     color:gray;
+}
+
+.like{
+    display:flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.like p{
+    padding:10px;
 }
